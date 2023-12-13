@@ -145,5 +145,7 @@ function callSendAPI(sender_psid, response) {
     });
 }
 module.exports = {
-    getHomePage, postWebhook, getWebhook
+    getHomePage: getHomePage,
+    postWebhook: postWebhook,
+    getWebhook: getWebhook
 }
