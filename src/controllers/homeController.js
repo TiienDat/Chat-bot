@@ -1,5 +1,6 @@
 require('dotenv').config();
 import request from 'request';
+import chatbotServie from "../services/chatbotSevice"
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
@@ -129,17 +130,23 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
     let response;
 
     // Get the payload for the postback
     let payload = received_postback.payload;
-
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
+    switch (payload) {
+        case 'yes':
+            response = { "text": "Thanks!" }
+            break;
+        case 'no':
+            response = { "text": "Oops, try sending another image." }
+            break;
+        case 'GET_STARTTED':
+            await chatbotServie.handleGetStarted(sender_psid);
+            break;
+        default:
+            response = { "text": `Oops, i don't know response with postback ${payload}` }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
