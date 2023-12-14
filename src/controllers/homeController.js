@@ -61,6 +61,7 @@ let getWebhook = (req, res) => {
 }
 
 let setupProfile = async (req, res) => {
+    // call
     // call profile facebook
     let request_body = {
         "get_started": { "payload": "GET_STARTED" },
