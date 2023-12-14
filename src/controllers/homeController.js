@@ -58,6 +58,31 @@ let getWebhook = (req, res) => {
         }
     }
 }
+
+let setupProfile = async (req, res) => {
+    // call profile facebook
+    let request_body = {
+        "get_started": { "payload": "GET_STARTTED" },
+        "whitelisted_domains": ["https://chat-bot-services.onrender.com/"]
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        console.log(body)
+        if (!err) {
+            console.log('Setup user profile succeeds!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+
+    return res.send("Setup user profile succeeds !");
+}
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
@@ -148,5 +173,6 @@ function callSendAPI(sender_psid, response) {
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
-    getWebhook: getWebhook
+    getWebhook: getWebhook,
+    setupProfile: setupProfile
 }
