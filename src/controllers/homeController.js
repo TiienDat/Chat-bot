@@ -64,7 +64,7 @@ let setupProfile = async (req, res) => {
     // call
     // call profile facebook
     let request_body = {
-        "get_started": { "payload": "GET_STARTED" },
+        "get_started": { "payload": "GET_STARTTED" },
         "whitelisted_domains": ["https://chat-bot-services.onrender.com/"]
     }
 
@@ -143,7 +143,7 @@ async function handlePostback(sender_psid, received_postback) {
         case 'no':
             response = { "text": "Oops, try sending another image." }
             break;
-        case 'GET_STARTED':
+        case 'GET_STARTTED':
             await chatbotServie.handleGetStarted(sender_psid);
             break;
         default:
