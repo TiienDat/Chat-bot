@@ -43,7 +43,6 @@ let getUserName = (sender_psid) => {
         });
     })
     // Send the HTTP request to the Messenger Platform
-    return username;
 }
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
