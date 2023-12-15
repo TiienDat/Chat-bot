@@ -101,7 +101,7 @@ let sendGetStartedTemplate = () => {
     }
     return response2;
 }
-let handleMainMenuTemplate = () => {
+let handleMainMenuTemplate = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let response1 = getMainMenuTemplate()
@@ -180,7 +180,107 @@ let getMainMenuTemplate = () => {
     }
     return response3;
 }
+// let handleSendHeart = (sender_psid) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             let response1 = getHeartMenuTemplate()
+//             await callSendAPI(sender_psid, response1)
+//             resolve('done')
+//         } catch (error) {
+//             reject(error)
+//         }
+//     })
+// }
+let handleSendDigest = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = getDigestMenuTemplate()
+            await callSendAPI(sender_psid, response1)
+            resolve('done')
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+// let handleSendSpine = (sender_psid) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             let response1 = getSpineMenuTemplate()
+//             await callSendAPI(sender_psid, response1)
+//             resolve('done')
+//         } catch (error) {
+//             reject(error)
+//         }
+//     })
+// }
+let getDigestMenuTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Đau bụng, dạ dày",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_SPECIALTY,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE",
+                        }
+                    ],
+                },
+                {
+                    "title": "Rối loạn tiêu hóa",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_CLINIC,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_1",
+                        }
+                    ],
+                },
+                {
+                    "title": "Co thắt thực quản",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_2",
+                        }
+                    ],
+                },
+                {
+                    "title": "Ăn uống kém, không ngon",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_OPEN,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Đặt lịch khám ngay",
+                            "payload": "BACK_MENU",
+                        },
+                    ],
+                },
+                ]
+            }
+        }
+    }
+    return response;
+}
+// let getHeartMenuTemplate = ()=>{
+
+// }
+// let getSpineMenuTemplate = ()=>{
+
+// }
 module.exports = {
     handleGetStarted,
-    handleMainMenuTemplate
+    handleMainMenuTemplate, handleSendDigest,
+    // handleSendSpine,handleSendHeart
 }
