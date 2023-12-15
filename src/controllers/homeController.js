@@ -4,7 +4,6 @@ import chatbotServie from "../services/chatbotSevice"
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-const IMAGE_GET_STARTED = 'https://bit.ly/bookingcareplus'
 
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs')
@@ -106,24 +105,19 @@ function handleMessage(sender_psid, received_message) {
                 "payload": {
                     "template_type": "generic",
                     "elements": [{
-                        "title": "xin chào bạn đã đến với BookingCare+ ?",
-                        "subtitle": "Dưới đây là các lựa chọn của phòng khám.",
-                        "image_url": IMAGE_GET_STARTED,
+                        "title": "Is this the right picture?",
+                        "subtitle": "Tap a button to answer.",
+                        "image_url": attachment_url,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Bạn cần giúp đỡ gì không?",
-                                "payload": "MAIN_MENU",
+                                "title": "Yes!",
+                                "payload": "yes",
                             },
                             {
                                 "type": "postback",
-                                "title": "Làm bài test sức khỏe tổng quát",
-                                "payload": "TEST",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Đặt lịch khám ngay !!!",
-                                "payload": "BOOKING",
+                                "title": "No!",
+                                "payload": "no",
                             }
                         ],
                     }]
