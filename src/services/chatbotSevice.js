@@ -178,7 +178,7 @@ let getMainMenuTemplate = () => {
             }
         }
     }
-    return response2;
+    return response3;
 }
 module.exports = {
     handleGetStarted,
