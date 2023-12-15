@@ -48,7 +48,7 @@ let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let username = await getUserName(sender_psid)
-            let response = { "text": `Ok Xin chào bạn ${username} đến với trang fanpage của chúng tôi` }
+            let response = { "text": `Xin chào bạn ${username} đến với trang fanpage của chúng tôi` }
             await callSendAPI(sender_psid, response);
             resolve('done')
         } catch (error) {

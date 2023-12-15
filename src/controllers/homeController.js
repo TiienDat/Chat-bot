@@ -4,6 +4,7 @@ import chatbotServie from "../services/chatbotSevice"
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+const IMAGE_GET_STARTED = 'https://bit.ly/bookingcareplus'
 
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs')
@@ -105,19 +106,24 @@ function handleMessage(sender_psid, received_message) {
                 "payload": {
                     "template_type": "generic",
                     "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
+                        "title": "xin chào bạn đã đến với BookingCare+ ?",
+                        "subtitle": "Dưới đây là các lựa chọn của phòng khám.",
+                        "image_url": IMAGE_GET_STARTED,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
+                                "title": "Bạn cần giúp đỡ gì không?",
+                                "payload": "MAIN_MENU",
                             },
                             {
                                 "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
+                                "title": "Làm bài test sức khỏe tổng quát",
+                                "payload": "TEST",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Đặt lịch khám ngay !!!",
+                                "payload": "BOOKING",
                             }
                         ],
                     }]
@@ -144,6 +150,7 @@ async function handlePostback(sender_psid, received_postback) {
             response = { "text": "Oops, try sending another image." }
             break;
         case 'GET_STARTTED':
+        case 'RESTART_BOT':
             await chatbotServie.handleGetStarted(sender_psid);
             break;
         default:
@@ -178,9 +185,55 @@ function callSendAPI(sender_psid, response) {
         }
     });
 }
+
+let setupPersistentMenu = async (req, res) => {
+    let request_body = {
+        "persistent_menu": [
+            {
+                "locale": "default",
+                "composer_input_disabled": false,
+                "call_to_actions": [
+                    {
+                        "type": "web_url",
+                        "title": "HomePage Booking Care ",
+                        "url": "https://www.facebook.com/bookingeric",
+                        "webview_height_ratio": "full"
+                    },
+                    {
+                        "type": "web_url",
+                        "title": "Trang web của chúng tôi",
+                        "url": "https://www.apple.com/",
+                        "webview_height_ratio": "full"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Khởi động lại Chatbot",
+                        "payload": "RESTART_BOT"
+                    }
+                ]
+            }
+        ]
+    }
+    await request({
+        "uri": `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        console.log(body)
+        if (!err) {
+            console.log('Setup persistent menu succeeds!')
+        } else {
+            console.error("Unable persistent menu :" + err);
+        }
+    });
+
+    return res.send('Setup persistent menu succeeds!');
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
-    setupProfile: setupProfile
+    setupProfile: setupProfile,
+    setupPersistentMenu: setupPersistentMenu
 }
