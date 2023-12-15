@@ -6,6 +6,8 @@ const IMAGE_GET_STARTED = 'https://bit.ly/bookingcareplus'
 const IMAGE_GET_OPEN = 'https://bit.ly/openTime'
 const IMAGE_GET_CLINIC = 'https://bit.ly/clinicEric'
 const IMAGE_GET_SPECIALTY = 'https://bit.ly/specialtyEric'
+
+
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -99,7 +101,17 @@ let sendGetStartedTemplate = () => {
     }
     return response2;
 }
-
+let handleMainMenuTemplate = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = getMainMenuTemplate()
+            await callSendAPI(sender_psid, response1)
+            resolve('done')
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 let getMainMenuTemplate = () => {
     let response3 = {
         "attachment": {
@@ -169,6 +181,6 @@ let getMainMenuTemplate = () => {
     return response2;
 }
 module.exports = {
-    handleGetStarted, callSendAPI,
-    getUserName, getMainMenuTemplate
+    handleGetStarted,
+    handleMainMenuTemplate
 }
