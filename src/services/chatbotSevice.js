@@ -489,5 +489,5 @@ module.exports = {
     handleGetStarted,
     handleMainMenuTemplate, handleSendDigest,
     handleSendSpine, handleSendHeart,
-    handleSendViewMore
+    handleSendViewMore, callSendAPI
 }

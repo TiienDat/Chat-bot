@@ -243,11 +243,36 @@ let setupPersistentMenu = async (req, res) => {
 let getBooking = (req, res) => {
     return res.render('booking.ejs')
 }
+let postBookingAjax = async (req, res) => {
+    try {
+        let customerName = "";
+        if (req.body.customerName === "") {
+            customerName = "Empty";
+        } else customerName = req.body.customerName;
+
+        let response = {
+            "text": `--- Thông tin đặt lịch khám bệnh ---
+            \nHọ và Tên : ${customerName}
+            \nEmail : ${req.body.email}
+            \nSố Điện Thoại : ${req.body.phoneNumber}
+            `
+        };
+        await chatbotServie.callSendAPI(sender_psid, response)
+        return res.status(200).json({
+            message: 'Ok'
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server error"
+        })
+    }
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
-    getBooking: getBooking
+    getBooking: getBooking,
+    postBookingAjax: postBookingAjax
 }

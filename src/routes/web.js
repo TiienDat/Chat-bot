@@ -9,6 +9,7 @@ let initWebRoutes = (app) => {
     router.post('/setup-profile', homeController.setupProfile)
     router.post('/setup-persistent_menu', homeController.setupPersistentMenu)
     router.get('/booking', homeController.getBooking)
+    router.post('/booking-ajax', homeController.postBookingAjax)
 
     router.post('/webhook', homeController.postWebhook)
     router.get('/webhook', homeController.getWebhook)
