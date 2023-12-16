@@ -257,7 +257,7 @@ let postBookingAjax = async (req, res) => {
             \nSố Điện Thoại : ${req.body.phoneNumber}
             `
         };
-        await chatbotServie.callSendAPI(sender_psid, response)
+        await chatbotServie.callSendAPI(req.body.psid, response)
         return res.status(200).json({
             message: 'Ok'
         });
