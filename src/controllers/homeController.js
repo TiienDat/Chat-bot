@@ -164,7 +164,7 @@ async function handlePostback(sender_psid, received_postback) {
             await chatbotServie.handleSendViewMore(sender_psid);
             break;
         default:
-            response = { "text": `Oops, i don't know response with postback ${payload}` }
+            response = { "text": `Xin lỗi đây là ChatBot tự động của BookingCare+ ^^` }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);

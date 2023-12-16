@@ -9,6 +9,18 @@ const IMAGE_GET_SPECIALTY = 'https://bit.ly/specialtyEric'
 const IMAGE_OPEN = 'https://bit.ly/gifEric1'
 
 
+const IMAGE_DIGEST1 = 'https://bcare.vn/upload/2019/09/28/20190927_200926_832533_viem-loet-da-day.max-800x800.jpg'
+const IMAGE_DIGEST2 = 'https://suckhoehangngay.mediacdn.vn/zoom/680_425/2019/4/24/trieu-chung-nong-rat-1556094097361809199958-crop-1556094106344706596091.png'
+const IMAGE_DIGEST3 = 'https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-human-body-stomach-illustration-image_1458844.jpg'
+
+const IMAGE_HEART1 = 'https://tobacare.com/wp-content/uploads/2021/08/c482n-gc3ac-c491e1bb83-tim-khe1bb8fe-me1baa1nh-vc3a0-cc3a1ch-phc3b2ng-nge1bbaba-be1bb87nh.jpg'
+const IMAGE_HEART2 = 'https://vinmec-prod.s3.amazonaws.com/images/20190607_143008_003789_cda4a01dc65c2f02764.max-1800x1800.jpg'
+const IMAGE_HEART3 = 'https://i.dailymail.co.uk/1s/2022/07/02/13/59784117-0-image-a-14_1656763817533.jpg'
+
+const IMAGE_SPINE1 = 'https://media.istockphoto.com/id/1440480206/photo/spinal-cord-vertebral-column-of-human-skeleton-system-anatomy.jpg?s=612x612&w=0&k=20&c=o5WDKYjNaAH5bitkmWdtmUXrp6L8cwUT-bGRIj5tcWA='
+const IMAGE_SPINE2 = 'https://hips.hearstapps.com/hmg-prod/images/281/maingettyimages-122373921-1518562427.jpg'
+const IMAGE_SPINE3 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM-HnOo2TctBIG_RurF0RDC_oEt_OjMwjLqrfQ3VEu0w2y4TgqmA-E2Aalc8BVxkDLAkc&usqp=CAU'
+
 let callSendAPI = async (sender_psid, response) => {
     // Construct the message body
     let request_body = {
@@ -271,7 +283,7 @@ let getDigestMenuTemplate = () => {
                 "elements": [{
                     "title": "Đau bụng, dạ dày",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_SPECIALTY,
+                    "image_url": IMAGE_DIGEST3,
                     "buttons": [
                         {
                             "type": "postback",
@@ -283,7 +295,7 @@ let getDigestMenuTemplate = () => {
                 {
                     "title": "Ăn uống kém, không ngon",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_CLINIC,
+                    "image_url": IMAGE_DIGEST2,
                     "buttons": [
                         {
                             "type": "postback",
@@ -295,7 +307,7 @@ let getDigestMenuTemplate = () => {
                 {
                     "title": "Co thắt thực quản",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_DIGEST1,
                     "buttons": [
                         {
                             "type": "postback",
@@ -307,7 +319,7 @@ let getDigestMenuTemplate = () => {
                 {
                     "title": "Gửi lại chuyên khoa",
                     "subtitle": "Quay lại menu chính",
-                    "image_url": IMAGE_GET_OPEN,
+                    "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                         {
                             "type": "postback",
@@ -331,7 +343,7 @@ let getHeartMenuTemplate = () => {
                 "elements": [{
                     "title": "Tăng huyết áp, hạ huyết áp",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_SPECIALTY,
+                    "image_url": IMAGE_HEART1,
                     "buttons": [
                         {
                             "type": "postback",
@@ -343,7 +355,7 @@ let getHeartMenuTemplate = () => {
                 {
                     "title": "Cảm giác hồi hộp, tim đập nhanh",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_CLINIC,
+                    "image_url": IMAGE_HEART2,
                     "buttons": [
                         {
                             "type": "postback",
@@ -355,7 +367,7 @@ let getHeartMenuTemplate = () => {
                 {
                     "title": "Giãn tĩnh mạch chân",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_HEART3,
                     "buttons": [
                         {
                             "type": "postback",
@@ -367,7 +379,7 @@ let getHeartMenuTemplate = () => {
                 {
                     "title": "Gửi lại chuyên khoa",
                     "subtitle": "Quay lại menu chính",
-                    "image_url": IMAGE_GET_OPEN,
+                    "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                         {
                             "type": "postback",
@@ -391,7 +403,7 @@ let getSpineMenuTemplate = () => {
                 "elements": [{
                     "title": "Đau cột sống, đau thắt lưng",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_SPECIALTY,
+                    "image_url": IMAGE_SPINE1,
                     "buttons": [
                         {
                             "type": "postback",
@@ -403,7 +415,7 @@ let getSpineMenuTemplate = () => {
                 {
                     "title": "Chấn thương cột sống",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_CLINIC,
+                    "image_url": IMAGE_SPINE2,
                     "buttons": [
                         {
                             "type": "postback",
@@ -415,7 +427,7 @@ let getSpineMenuTemplate = () => {
                 {
                     "title": "Đau mỏi cổ vai gáy, bả vai",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_SPINE3,
                     "buttons": [
                         {
                             "type": "postback",
@@ -427,7 +439,7 @@ let getSpineMenuTemplate = () => {
                 {
                     "title": "Gửi lại chuyên khoa",
                     "subtitle": "Quay lại menu chính",
-                    "image_url": IMAGE_GET_OPEN,
+                    "image_url": IMAGE_GET_STARTED,
                     "buttons": [
                         {
                             "type": "postback",
