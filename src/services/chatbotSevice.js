@@ -6,9 +6,10 @@ const IMAGE_GET_STARTED = 'https://bit.ly/bookingcareplus'
 const IMAGE_GET_OPEN = 'https://bit.ly/openTime'
 const IMAGE_GET_CLINIC = 'https://bit.ly/clinicEric'
 const IMAGE_GET_SPECIALTY = 'https://bit.ly/specialtyEric'
+const IMAGE_OPEN = 'https://bit.ly/gifEric1'
 
 
-let callSendAPI = (sender_psid, response) => {
+let callSendAPI = async (sender_psid, response) => {
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -16,6 +17,8 @@ let callSendAPI = (sender_psid, response) => {
         },
         "message": response
     }
+    await sendTypingOn(sender_psid);
+    await sendMarkReadMessage(sender_psid)
 
     // Send the HTTP request to the Messenger Platform
     request({
@@ -26,6 +29,52 @@ let callSendAPI = (sender_psid, response) => {
     }, (err, res, body) => {
         if (!err) {
             console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+}
+let sendTypingOn = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "typing_on"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v9.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('sendTypingOn send!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+}
+let sendMarkReadMessage = (sender_psid) => {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "sender_action": "mark_seen"
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v9.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('sendTypingOn send!')
         } else {
             console.error("Unable to send message:" + err);
         }
@@ -147,17 +196,17 @@ let getMainMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "TP.Hồ Chí Minh",
+                            "title": "Hồ Chí Minh",
                             "payload": "HCM",
                         },
                         {
                             "type": "postback",
-                            "title": "TP.Hà Nội",
+                            "title": "Hà Nội",
                             "payload": "HN",
                         },
                         {
                             "type": "postback",
-                            "title": "TP.Đà Nẵn",
+                            "title": "Đà Nẵng",
                             "payload": "DN",
                         }
                     ],
@@ -226,7 +275,7 @@ let getDigestMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
+                            "title": "Tư vấn trực tiếp",
                             "payload": "VIEW_MORE",
                         }
                     ],
@@ -238,8 +287,8 @@ let getDigestMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_1",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -250,8 +299,8 @@ let getDigestMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_2",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -263,7 +312,7 @@ let getDigestMenuTemplate = () => {
                         {
                             "type": "postback",
                             "title": "Quay lại với chuyên khoa",
-                            "payload": "BACK_MENU_DIGEST",
+                            "payload": "BACK_MENU",
                         },
                     ],
                 },
@@ -286,8 +335,8 @@ let getHeartMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_3",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -298,8 +347,8 @@ let getHeartMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_4",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -310,8 +359,8 @@ let getHeartMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_5",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -323,7 +372,7 @@ let getHeartMenuTemplate = () => {
                         {
                             "type": "postback",
                             "title": "Quay lại với chuyên khoa",
-                            "payload": "BACK_MENU_HEART",
+                            "payload": "BACK_MENU",
                         },
                     ],
                 },
@@ -346,8 +395,8 @@ let getSpineMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_6",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -358,8 +407,8 @@ let getSpineMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_7",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -370,8 +419,8 @@ let getSpineMenuTemplate = () => {
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Xem chi tiết",
-                            "payload": "VIEW_MORE_8",
+                            "title": "Tư vấn trực tiếp",
+                            "payload": "VIEW_MORE",
                         }
                     ],
                 },
@@ -383,7 +432,7 @@ let getSpineMenuTemplate = () => {
                         {
                             "type": "postback",
                             "title": "Quay lại với chuyên khoa",
-                            "payload": "BACK_MENU_SPINE",
+                            "payload": "BACK_MENU",
                         },
                     ],
                 },
@@ -393,8 +442,33 @@ let getSpineMenuTemplate = () => {
     }
     return response;
 }
+let handleSendViewMore = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = getSendViewMore();
+            await callSendAPI(sender_psid, res)
+            resolve('done')
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+let getSendViewMore = () => {
+    let response1 = {
+        "attachment": {
+            "type": "image",
+            "payload": {
+                "url": IMAGE_OPEN,
+                "is_reusable": true
+            }
+        }
+    }
+    let response2 = { "text": `Chúng tôi đã nhận được yêu cầu của bạn vui lòng đợi trong giây lát chúng tôi sẽ phản hồi sớm nhất có thể` };
+    return response1, response2;
+}
 module.exports = {
     handleGetStarted,
     handleMainMenuTemplate, handleSendDigest,
-    handleSendSpine, handleSendHeart
+    handleSendSpine, handleSendHeart,
+    handleSendViewMore
 }
