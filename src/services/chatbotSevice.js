@@ -151,9 +151,11 @@ let sendGetStartedTemplate = () => {
                             "payload": "TEST",
                         },
                         {
-                            "type": "postback",
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_BOOKING}`,
                             "title": "Đặt lịch khám",
-                            "payload": "BOOKING",
+                            "webview_height_ratio": "tall",
+                            "messenger_extensions": true
                         }
                     ],
                 }]
