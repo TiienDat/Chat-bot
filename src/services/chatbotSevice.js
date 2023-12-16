@@ -458,7 +458,9 @@ let handleSendViewMore = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = getSendViewMore();
+            let res2 = getSendMore()
             await callSendAPI(sender_psid, res)
+            await callSendAPI(sender_psid, res2)
             resolve('done')
         } catch (error) {
             reject(error)
@@ -475,8 +477,11 @@ let getSendViewMore = () => {
             }
         }
     }
+    return response1;
+}
+let getSendMore = () => {
     let response2 = { "text": `Chúng tôi đã nhận được yêu cầu của bạn vui lòng đợi trong giây lát chúng tôi sẽ phản hồi sớm nhất có thể` };
-    return response1, response2;
+    return response2
 }
 module.exports = {
     handleGetStarted,
