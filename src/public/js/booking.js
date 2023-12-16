@@ -72,6 +72,7 @@ function handleClickButtonBooking() {
                 data: data,
                 success: function (data) {
                     console.log(data);
+                    console.log('url check :', url)
                 },
                 error: function (error) {
                     console.log(error);
