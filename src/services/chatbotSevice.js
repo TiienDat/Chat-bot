@@ -180,17 +180,17 @@ let getMainMenuTemplate = () => {
     }
     return response3;
 }
-// let handleSendHeart = (sender_psid) => {
-//     return new Promise(async (resolve, reject) => {
-//         try {
-//             let response1 = getHeartMenuTemplate()
-//             await callSendAPI(sender_psid, response1)
-//             resolve('done')
-//         } catch (error) {
-//             reject(error)
-//         }
-//     })
-// }
+let handleSendHeart = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = getHeartMenuTemplate()
+            await callSendAPI(sender_psid, response1)
+            resolve('done')
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 let handleSendDigest = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -202,17 +202,17 @@ let handleSendDigest = (sender_psid) => {
         }
     })
 }
-// let handleSendSpine = (sender_psid) => {
-//     return new Promise(async (resolve, reject) => {
-//         try {
-//             let response1 = getSpineMenuTemplate()
-//             await callSendAPI(sender_psid, response1)
-//             resolve('done')
-//         } catch (error) {
-//             reject(error)
-//         }
-//     })
-// }
+let handleSendSpine = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response1 = getSpineMenuTemplate()
+            await callSendAPI(sender_psid, response1)
+            resolve('done')
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 let getDigestMenuTemplate = () => {
     let response = {
         "attachment": {
@@ -232,7 +232,7 @@ let getDigestMenuTemplate = () => {
                     ],
                 },
                 {
-                    "title": "Rối loạn tiêu hóa",
+                    "title": "Ăn uống kém, không ngon",
                     "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
                     "image_url": IMAGE_GET_CLINIC,
                     "buttons": [
@@ -256,14 +256,14 @@ let getDigestMenuTemplate = () => {
                     ],
                 },
                 {
-                    "title": "Ăn uống kém, không ngon",
-                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "title": "Gửi lại chuyên khoa",
+                    "subtitle": "Quay lại menu chính",
                     "image_url": IMAGE_GET_OPEN,
                     "buttons": [
                         {
                             "type": "postback",
-                            "title": "Đặt lịch khám ngay",
-                            "payload": "BACK_MENU",
+                            "title": "Quay lại với chuyên khoa",
+                            "payload": "BACK_MENU_DIGEST",
                         },
                     ],
                 },
@@ -273,14 +273,128 @@ let getDigestMenuTemplate = () => {
     }
     return response;
 }
-// let getHeartMenuTemplate = ()=>{
-
-// }
-// let getSpineMenuTemplate = ()=>{
-
-// }
+let getHeartMenuTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Tăng huyết áp, hạ huyết áp",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_SPECIALTY,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_3",
+                        }
+                    ],
+                },
+                {
+                    "title": "Cảm giác hồi hộp, tim đập nhanh",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_CLINIC,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_4",
+                        }
+                    ],
+                },
+                {
+                    "title": "Giãn tĩnh mạch chân",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_5",
+                        }
+                    ],
+                },
+                {
+                    "title": "Gửi lại chuyên khoa",
+                    "subtitle": "Quay lại menu chính",
+                    "image_url": IMAGE_GET_OPEN,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Quay lại với chuyên khoa",
+                            "payload": "BACK_MENU_HEART",
+                        },
+                    ],
+                },
+                ]
+            }
+        }
+    }
+    return response;
+}
+let getSpineMenuTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Đau cột sống, đau thắt lưng",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_SPECIALTY,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_6",
+                        }
+                    ],
+                },
+                {
+                    "title": "Chấn thương cột sống",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_CLINIC,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_7",
+                        }
+                    ],
+                },
+                {
+                    "title": "Đau mỏi cổ vai gáy, bả vai",
+                    "subtitle": "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa HCM",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Xem chi tiết",
+                            "payload": "VIEW_MORE_8",
+                        }
+                    ],
+                },
+                {
+                    "title": "Gửi lại chuyên khoa",
+                    "subtitle": "Quay lại menu chính",
+                    "image_url": IMAGE_GET_OPEN,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Quay lại với chuyên khoa",
+                            "payload": "BACK_MENU_SPINE",
+                        },
+                    ],
+                },
+                ]
+            }
+        }
+    }
+    return response;
+}
 module.exports = {
     handleGetStarted,
     handleMainMenuTemplate, handleSendDigest,
-    // handleSendSpine,handleSendHeart
+    handleSendSpine, handleSendHeart
 }

@@ -151,14 +151,17 @@ async function handlePostback(sender_psid, received_postback) {
             await chatbotServie.handleMainMenuTemplate(sender_psid);
             break;
         case 'DIGEST':
+        case 'BACK_MENU_DIGEST':
             await chatbotServie.handleSendDigest(sender_psid);
             break;
-        // case 'HEART':
-        //     await chatbotServie.handleSendHeart(sender_psid);
-        //     break;
-        // case 'SPINE':
-        //     await chatbotServie.handleSendSpine(sender_psid);
-        //     break;
+        case 'HEART':
+        case 'BACK_MENU_HEART':
+            await chatbotServie.handleSendHeart(sender_psid);
+            break;
+        case 'SPINE':
+        case 'BACK_MENU_SPINE':
+            await chatbotServie.handleSendSpine(sender_psid);
+            break;
 
         default:
             response = { "text": `Oops, i don't know response with postback ${payload}` }
