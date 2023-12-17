@@ -116,7 +116,7 @@ let handleGetStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid)
             let response1 = { "text": `Xin chào bạn ${username} đến với trang fanpage của chúng tôi` }
-            let response2 = sendGetStartedTemplate(sender_psid)
+            let response2 = sendGetStartedTemplate()
             // send text messenger
             await callSendAPI(sender_psid, response1);
 
@@ -129,7 +129,7 @@ let handleGetStarted = (sender_psid) => {
         }
     })
 }
-let sendGetStartedTemplate = (senderID) => {
+let sendGetStartedTemplate = () => {
     let response2 = {
         "attachment": {
             "type": "template",
@@ -152,10 +152,9 @@ let sendGetStartedTemplate = (senderID) => {
                         },
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_WEB_VIEW_BOOKING}/${senderID}`,
                             "title": "Đặt lịch khám",
-                            "webview_height_ratio": "tall",
-                            "messenger_extensions": true
+                            "url": "https://bookingcare.vn/lich-hen",
+                            "webview_height_ratio": "full"
                         }
                     ],
                 }]
