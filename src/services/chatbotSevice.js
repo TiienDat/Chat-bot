@@ -116,7 +116,7 @@ let handleGetStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid)
             let response1 = { "text": `Xin chào bạn ${username} đến với trang fanpage của chúng tôi` }
-            let response2 = sendGetStartedTemplate()
+            let response2 = sendGetStartedTemplate(senderID)
             // send text messenger
             await callSendAPI(sender_psid, response1);
 
@@ -129,7 +129,7 @@ let handleGetStarted = (sender_psid) => {
         }
     })
 }
-let sendGetStartedTemplate = () => {
+let sendGetStartedTemplate = (senderID) => {
     let response2 = {
         "attachment": {
             "type": "template",
@@ -152,7 +152,7 @@ let sendGetStartedTemplate = () => {
                         },
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_WEB_VIEW_BOOKING}`,
+                            "url": `${process.env.URL_WEB_VIEW_BOOKING}/${senderID}`,
                             "title": "Đặt lịch khám",
                             "webview_height_ratio": "tall",
                             "messenger_extensions": true
