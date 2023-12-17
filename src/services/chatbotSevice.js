@@ -116,7 +116,7 @@ let handleGetStarted = (sender_psid) => {
         try {
             let username = await getUserName(sender_psid)
             let response1 = { "text": `Xin chào bạn ${username} đến với trang fanpage của chúng tôi` }
-            let response2 = sendGetStartedTemplate(senderID)
+            let response2 = sendGetStartedTemplate(sender_psid)
             // send text messenger
             await callSendAPI(sender_psid, response1);
 
