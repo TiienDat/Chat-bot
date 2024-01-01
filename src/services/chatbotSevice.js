@@ -21,30 +21,37 @@ const IMAGE_SPINE1 = 'https://media.istockphoto.com/id/1440480206/photo/spinal-c
 const IMAGE_SPINE2 = 'https://hips.hearstapps.com/hmg-prod/images/281/maingettyimages-122373921-1518562427.jpg'
 const IMAGE_SPINE3 = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM-HnOo2TctBIG_RurF0RDC_oEt_OjMwjLqrfQ3VEu0w2y4TgqmA-E2Aalc8BVxkDLAkc&usqp=CAU'
 
-let callSendAPI = async (sender_psid, response) => {
+let callSendAPI = (sender_psid, response) => {
     // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": response
-    }
-    await sendTypingOn(sender_psid);
-    await sendMarkReadMessage(sender_psid)
+    return new Promise(async (resolve, reject) => {
+        try {
+            let request_body = {
+                "recipient": {
+                    "id": sender_psid
+                },
+                "message": response
+            }
+            await sendTypingOn(sender_psid);
+            await sendMarkReadMessage(sender_psid)
 
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v9.0/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
+            // Send the HTTP request to the Messenger Platform
+            request({
+                "uri": "https://graph.facebook.com/v9.0/me/messages",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, (err, res, body) => {
+                if (!err) {
+                    resolve('send')
+                } else {
+                    reject(err)
+                    console.error("Unable to send message:" + err);
+                }
+            });
+        } catch (error) {
+
         }
-    });
+    })
 }
 let sendTypingOn = (sender_psid) => {
     // Construct the message body

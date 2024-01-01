@@ -212,7 +212,7 @@ let setupPersistentMenu = async (req, res) => {
                     {
                         "type": "web_url",
                         "title": "Trang web của chúng tôi",
-                        "url": "https://www.apple.com/",
+                        "url": "https://tiiendat-fe-bookingcare.vercel.app/",
                         "webview_height_ratio": "full"
                     },
                     {
